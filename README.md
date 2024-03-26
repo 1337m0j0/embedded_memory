@@ -1,2 +1,49 @@
-# embedded_memory
-A memory manager for embedded devices
+# Embedded Memory
+
+A memory allocator for safety-critical embedded devices. Example integration
+and usage available in tests folder.
+
+## Design Principles and Features
+
+* static pool-based memory manager
+* configured at compile-time
+* fully predictable execution time
+* thread-safety
+* safety-mechanisms
+* can be used to replace libc and libcxx memory allocators
+
+## Compliance
+
+* C++14
+* Misra C++23
+* POSIX
+
+## Detailed Design
+
+* interfaces defined in header
+* allocation algorithms described in markdown files
+* requirements for all functional and non-functional properties
+* all requirements are traceable to unit tests
+
+## Static tests
+
+* static analysis
+
+## Dynamic tests
+
+* unit tests with MC/DC coverage
+* performance stress tests
+* fault injection tests
+* fuzz tests
+
+## Profiling
+
+* extended profiling available to tune configuration
+
+## Release Plan
+
+### Version 0.1.0
+
+* basic implementation of all interfaces
+* region management using linked-lists
+* no support for multi-threading
