@@ -40,6 +40,13 @@ and usage available in tests folder.
 
 * extended profiling available to tune configuration
 
+## Tooling
+
+* build system: bazel
+* tests: googletest
+* static analysis: clang-tidy
+* formatting: clang-format
+
 ## Release Plan
 
 ### Version 0.1.0
@@ -47,3 +54,4 @@ and usage available in tests folder.
 * basic implementation of all interfaces
 * region management using linked-lists
 * no support for multi-threading
+* basic unit tests
