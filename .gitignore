@@ -1,3 +1,7 @@
+# bazel artifacts
+bazel-*
+MODULE.bazel*
+
 # Prerequisites
 *.d
 
