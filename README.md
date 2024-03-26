@@ -3,6 +3,12 @@
 A memory allocator for safety-critical embedded devices. Example integration
 and usage available in tests folder.
 
+## Quickstart
+
+* build library: `bazel build //:em_lib`
+* run all tests: `bazel test //...`
+* build compile commands: `bazel run @hedron_compile_commands//:refresh_all`
+
 ## Design Principles and Features
 
 * static pool-based memory manager
