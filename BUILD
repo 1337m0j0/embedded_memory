@@ -1,12 +1,16 @@
 cc_library(
     name = "em_lib",
-    srcs = ["src/allocator.cpp"],
+    srcs = [
+        "src/allocator.cpp",
+        "src/allocator_config.hpp",
+        "src/memory_pool.hpp",
+        "src/memory_slot.hpp",
+    ],
     hdrs = ["include/em.hpp"],
     copts = [
         "-Wall",
         "-Wextra",
-        # warnings as errors to be enabled for the first release
-        # "-Werror",
+        "-Werror",
         "-Wpedantic",
         "-std=c++14",
     ],
@@ -14,14 +18,20 @@ cc_library(
 )
 
 cc_test(
-    name = "em_test",
+    name = "memory_pool_tests",
     size = "small",
-    srcs = ["tests/allocator_tests.cpp"],
+    srcs = [
+        # headers and sources
+        "src/memory_slot.hpp",
+        # test definitions
+        "tests/memory_pool_tests.cpp",
+        # unit under test
+        "src/memory_pool.hpp",
+    ],
     copts = [
         "-Wall",
         "-Wextra",
-        # warnings as errors to be enabled for the first release
-        # "-Werror",
+        "-Werror",
         "-Wpedantic",
         "-std=c++14",
     ],
