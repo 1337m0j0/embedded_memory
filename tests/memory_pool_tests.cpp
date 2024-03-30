@@ -79,3 +79,14 @@ TEST_F(MemoryPoolTest, RequestCleared) {
   // the whole slot shall be zeroed
   ASSERT_EQ(std::memcmp(kClearedSlotData.data(), slot, kTestPoolSlotSize), 0);
 }
+
+/* Returned memory can be written to. */
+TEST_F(MemoryPoolTest, WriteToMemory) {
+  // expected data
+  std::array<char, kTestPoolSlotSize> expected_data{};
+  std::memset(expected_data.data(), 1, kTestPoolSlotSize);
+  // write test data and check
+  void *slot = memory_pool_.GetSlot(true);
+  std::memset(slot, 1, kTestPoolSlotSize);
+  ASSERT_EQ(std::memcmp(expected_data.data(), slot, kTestPoolSlotSize), 0);
+}
