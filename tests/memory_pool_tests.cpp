@@ -31,6 +31,9 @@ TEST_F(MemoryPoolTest, AvailabilityAfterInitialization) {
   ASSERT_EQ(memory_pool_.GetNumFreeSlots(), kTestPoolNumSlots);
 }
 
+/* GetSizeSlots returns the size of memory slots managed by the memory pool. */
+TEST_F(MemoryPoolTest, GetSlotSize) { ASSERT_EQ(memory_pool_.GetSizeSlots(), kTestPoolSlotSize); }
+
 /* The memory pool will allow to reserve as many memory slots as it manages. For any additional
  * requests a nullptr is returned. */
 TEST_F(MemoryPoolTest, MaximumAvailability) {

@@ -46,6 +46,8 @@ class MemoryPool {
     return num_free_slots;
   }
 
+  std::size_t GetSizeSlots() const override { return SIZE_SLOTS; }
+
  private:
   /** @brief This array holds the data slots managed by this memory pool. */
   std::array<MemorySlot<SIZE_SLOTS>, NUM_SLOTS> memory_slots_{};
