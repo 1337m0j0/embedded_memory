@@ -3,7 +3,6 @@
 
 #include <array>
 #include <cstddef>
-#include <cstdint>
 
 template <std::size_t SIZE>
 struct MemorySlot {
@@ -12,9 +11,6 @@ struct MemorySlot {
 
   /** @brief This is the actual memory that can be allocated and used. */
   std::array<char, SIZE> data{};
-
-  /** @brief These bytes are used to detect overflows. */
-  std::uint32_t guard_bytes{};
 };
 
 #endif  // SRC_MEMORY_SLOT_HPP_
