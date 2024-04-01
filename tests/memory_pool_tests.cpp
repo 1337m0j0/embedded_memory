@@ -16,7 +16,8 @@ constexpr std::array<char, kTestPoolSlotSize> kClearedSlotData{};
 
 class MemoryPoolTest : public testing::Test {
  protected:
-  MemoryPool<kTestPoolSlotSize, kTestPoolNumSlots> memory_pool_{};
+  MemoryPool<kTestPoolSlotSize, kTestPoolNumSlots> memory_pool_instance_{};
+  IMemoryPool &memory_pool_ = memory_pool_instance_;
 
   void SetUp() override {}
   void TearDown() override {}
