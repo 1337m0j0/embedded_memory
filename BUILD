@@ -2,11 +2,11 @@ cc_library(
     name = "em_lib",
     srcs = [
         "src/allocator.cpp",
-        "src/allocator_config.hpp",
+        "src/allocator_config.cpp",
         "src/memory_pool.hpp",
         "src/memory_slot.hpp",
     ],
-    hdrs = ["include/em.hpp"],
+    hdrs = ["include/allocator.hpp"],
     copts = [
         "-Wall",
         "-Wextra",

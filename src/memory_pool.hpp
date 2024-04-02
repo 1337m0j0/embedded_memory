@@ -19,6 +19,12 @@ class IMemoryPool {
   virtual ~IMemoryPool() = default;
 };
 
+/** @brief Linked-list to manage lists of memory pools. */
+struct IMemoryPoolList {
+  IMemoryPool *current{nullptr};
+  IMemoryPoolList *next{nullptr};
+};
+
 /** @brief A MemoryPool manages a fixed number of memory slots of immutable equal size. */
 template <std::size_t SIZE_SLOTS, std::size_t NUM_SLOTS>
 class MemoryPool : public IMemoryPool {

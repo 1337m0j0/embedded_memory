@@ -1,33 +1,15 @@
-#include "include/em.hpp"
-#include "src/allocator_config.hpp"
+#include "include/allocator.hpp"
+
+#include <cstddef>
+
 #include "src/memory_pool.hpp"
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// Memory Pools
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-namespace {
-
-MemoryPool<em::config::kSizeSlotsSmall, em::config::kNumSlotsSmall> mem_pool_small;
-MemoryPool<em::config::kSizeSlotsMedium, em::config::kNumSlotsMedium> mem_pool_medium;
-MemoryPool<em::config::kSizeSlotsLarge, em::config::kNumSlotsLarge> mem_pool_large;
-
-const std::array<IMemoryPool *, 3> memory_pools{
-    &mem_pool_small,
-    &mem_pool_medium,
-    &mem_pool_large,
-};
-
-}  // namespace
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// Allocation and Deallocation Functions
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void *em::alloc(const std::size_t size, const bool clear_region) {
+void *em::Allocator::Alloc(const std::size_t requested_size, const bool clear_region) noexcept {
   void *res{nullptr};
-  for (auto const &memory_pool : memory_pools) {
-    if (size <= memory_pool->GetSizeSlots()) {
+  for (IMemoryPoolList *list = em::Allocator::memory_pool_list_; list != nullptr;
+       list = list->next) {
+    IMemoryPool *const memory_pool = list->current;
+    if (memory_pool != nullptr && requested_size <= memory_pool->GetSizeSlots()) {
       res = memory_pool->GetSlot(clear_region);
       if (nullptr != res) {
         return res;
