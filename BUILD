@@ -4,7 +4,7 @@ cc_library(
         "src/allocator.cpp",
         "src/allocator_config.cpp",
         "src/memory_pool.hpp",
-        "src/memory_slot.hpp",
+        "src/memory_pool_interfaces.hpp",
     ],
     hdrs = ["include/allocator.hpp"],
     copts = [
@@ -21,8 +21,6 @@ cc_test(
     name = "memory_pool_tests",
     size = "small",
     srcs = [
-        # headers and sources
-        "src/memory_slot.hpp",
         # test definitions
         "tests/memory_pool_tests.cpp",
         # unit under test

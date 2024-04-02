@@ -2,15 +2,17 @@
 
 #include "include/allocator.hpp"
 #include "src/memory_pool.hpp"
+#include "src/memory_pool_interfaces.hpp"
 
-/** This file shall contain only the definition of em::Allocator::memory_pool_list_
- *  and the associated private resources. Different versions of this file can be
- *  maintained for various deployment scenarios. A selection of one of these files
- *  by the corresponding build target shall be used to configure the allocator.
+/** The purpose of this file is to statically define the memory pools available to the allocator,
+ *  by defining em::Allocator::memory_pool_list_. Different versions of this file can be maintained
+ *  for various deployment scenarios. A selection of one of these files in a build target shall be
+ *  used to configure the allocator.
  *
- * Note on the NOLINT hints in this file: The corresponding lines define resources
- * that are not const but have protected visibility. They are intended to be used only
- * by the public functions of the Allocator class.
+ *  Note on the NOLINT hints in this file: The corresponding lines define resources that are not
+ *  const but have protected visibility. They are intended to be used only by the public functions
+ *  of the Allocator class. The NOLINT is thus used to suppress the linter warnings for
+ *  `cppcoreguidelines-avoid-non-const-global-variables`.
  */
 
 namespace {

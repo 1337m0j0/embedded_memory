@@ -5,25 +5,7 @@
 #include <cstddef>
 #include <cstring>
 
-#include "src/memory_slot.hpp"
-
-/** @brief General interface to interact with MemoryPool objects. */
-class IMemoryPool {
- public:
-  // interface functions
-  virtual void *GetSlot(bool clear_memory) = 0;
-  virtual void FreeSlot(void *ptr) = 0;
-  virtual std::size_t GetNumFreeSlots() = 0;
-  virtual std::size_t GetSizeSlots() const = 0;
-  // constructors and destructors
-  virtual ~IMemoryPool() = default;
-};
-
-/** @brief Linked-list to manage lists of memory pools. */
-struct IMemoryPoolList {
-  IMemoryPool *current{nullptr};
-  IMemoryPoolList *next{nullptr};
-};
+#include "src/memory_pool_interfaces.hpp"
 
 /** @brief A MemoryPool manages a fixed number of memory slots of immutable equal size. */
 template <std::size_t SIZE_SLOTS, std::size_t NUM_SLOTS>
@@ -67,7 +49,16 @@ class MemoryPool : public IMemoryPool {
   std::size_t GetSizeSlots() const override { return SIZE_SLOTS; }
 
  private:
-  /** @brief This array holds the data slots managed by this memory pool. */
+  /* Represents individual memory blocks managed by the memory pool. */
+  template <std::size_t SIZE>
+  struct MemorySlot {
+    // Tells whether this memory slot is currently in use.
+    bool is_reserved{false};
+    // This is the actual memory that can be allocated and used.
+    std::array<char, SIZE> data{};
+  };
+
+  /* This array holds the data slots managed by this memory pool. */
   std::array<MemorySlot<SIZE_SLOTS>, NUM_SLOTS> memory_slots_{};
 };
 
