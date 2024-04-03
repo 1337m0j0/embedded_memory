@@ -3,7 +3,7 @@
 
 #include <cstddef>
 
-#include "src/memory_pool.hpp"
+#include "src/memory_pool_interfaces.hpp"
 
 namespace em {
 

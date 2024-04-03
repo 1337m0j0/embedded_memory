@@ -7,10 +7,11 @@
 class IMemoryPool {
  public:
   // interface functions
-  virtual void *GetSlot(bool clear_memory) = 0;
-  virtual void FreeSlot(void *ptr) = 0;
-  virtual std::size_t GetNumFreeSlots() = 0;
-  virtual std::size_t GetSizeSlots() const = 0;
+  virtual void *GetBlock(bool clear_memory) = 0;
+  virtual void FreeBlock(void *ptr) = 0;
+  virtual std::size_t GetNumFreeBlocks() = 0;
+  virtual std::size_t GetSizeBlocks() const = 0;
+  virtual bool HasBufferOverflow() const = 0;
   // constructors and destructors
   virtual ~IMemoryPool() = default;
 };
