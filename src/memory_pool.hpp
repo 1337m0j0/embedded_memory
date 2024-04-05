@@ -42,6 +42,9 @@ class MemoryPool : public IMemoryPool {
 
   /// @brief Releases the memory block under the given pointer.
   void FreeBlock(void *ptr) override {
+    if (!PointerBelongsToMemoryPool(ptr)) {
+      return;
+    }
     Initialize();
     for (auto current_block = reserved_blocks_; current_block != nullptr;
          current_block = current_block->next) {
@@ -93,6 +96,12 @@ class MemoryPool : public IMemoryPool {
       }
     }
     return false;
+  }
+
+  /// @brief Tells whether pointer is within the managed range.
+  bool PointerBelongsToMemoryPool(void *ptr) override {
+    return ptr >= static_cast<void *>(memory_blocks_.at(0).data.data()) &&
+           ptr <= static_cast<void *>(memory_blocks_.at(NUM_BLOCKS - 1).data.data());
   }
 
  private:

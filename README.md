@@ -42,6 +42,10 @@ Bazel is used as a build system. Some important commands:
 
 * unit testing via googletest framework
 
+upcoming before 1.0:
+
+* parametric unit tests covering multiple memory pool configurations
+
 planned for 1.0:
 
 * MC/DC coverage
