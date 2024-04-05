@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstddef>
+#include <cstdint>
 #include <cstring>
 
 #include "src/memory_pool.hpp"
@@ -21,7 +22,12 @@ constexpr std::array<char, kTestPoolBlockSize> kClearedBlockData{};
 
 class MemoryPoolTest : public testing::Test {
  protected:
+  // The data_before/after_memory_pool variables are used to obtain pointers out of range of the
+  // memory pool; see the unit tests using them.
+  std::uint8_t data_before_memory_pool{0};
   MemoryPool<kTestPoolBlockSize, kTestPoolNumBlocks> memory_pool_instance_{};
+  std::uint8_t data_after_memory_pool{0};
+
   IMemoryPool &memory_pool_ = memory_pool_instance_;
 
   void SetUp() override {}
@@ -114,4 +120,22 @@ TEST_F(MemoryPoolTest, BufferOverflowDetection) {
   void *block = memory_pool_.GetBlock(true);
   std::memset(block, 1, kTestPoolBlockSize + 1);
   ASSERT_TRUE(memory_pool_.HasBufferOverflow());
+}
+
+// If a pointer is within its managed range, the memory pool should state so.
+TEST_F(MemoryPoolTest, PointerWithinRange) {
+  void *block = memory_pool_.GetBlock(true);
+  ASSERT_TRUE(memory_pool_.PointerBelongsToMemoryPool(block));
+}
+
+// If a pointer is before its managed range, the memory pool should state so.
+TEST_F(MemoryPoolTest, PointerBeforeRange) {
+  void *preceeding_adress = static_cast<void *>(&data_before_memory_pool);
+  ASSERT_FALSE(memory_pool_.PointerBelongsToMemoryPool(preceeding_adress));
+}
+
+// If a pointer is after its managed range, the memory pool should state so.
+TEST_F(MemoryPoolTest, PointerAfterRange) {
+  void *successing_adress = static_cast<void *>(&data_after_memory_pool);
+  ASSERT_FALSE(memory_pool_.PointerBelongsToMemoryPool(successing_adress));
 }

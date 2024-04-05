@@ -39,3 +39,25 @@ cc_test(
         "@googletest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "allocator_tests",
+    size = "small",
+    srcs = [
+        # test definitions
+        "tests/allocator_tests.cpp",
+    ],
+    copts = [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wpedantic",
+        "-std=c++14",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        # unit under test
+        ":em_lib",
+        "@googletest//:gtest_main",
+    ],
+)

@@ -12,6 +12,7 @@ class IMemoryPool {
   virtual std::size_t GetNumFreeBlocks() = 0;
   virtual std::size_t GetSizeBlocks() const = 0;
   virtual bool HasBufferOverflow() const = 0;
+  virtual bool PointerBelongsToMemoryPool(void *ptr) = 0;
   // constructors and destructors
   virtual ~IMemoryPool() = default;
 };

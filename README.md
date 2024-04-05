@@ -23,6 +23,7 @@ Bazel is used as a build system. Some important commands:
 ## Upcoming Features
 
 * multithreading support
+* callbacks for error handling (e.g. double-free, unknown free)
 * profiling to understand memory needs of users
 * profiling to assess performance
 
@@ -41,6 +42,10 @@ Bazel is used as a build system. Some important commands:
 ### Dynamic tests
 
 * unit testing via googletest framework
+
+upcoming before 1.0:
+
+* parametric unit tests covering multiple memory pool configurations
 
 planned for 1.0:
 
