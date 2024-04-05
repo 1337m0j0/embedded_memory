@@ -12,54 +12,39 @@ Main features:
 * safety-mechanisms
 * can be used to replace libc and libcxx memory allocators
 
-## Quickstart
+## Development Quickstart
+
+Bazel is used as a build system. Some important commands:
 
 * build library: `bazel build //:em_lib`
 * run all tests: `bazel test //...`
 * build compile commands: `bazel run @hedron_compile_commands//:refresh_all`
 
-## Roadmap
+## Upcoming Features
 
-### Version 0.1.0
+* multithreading support
+* profiling to understand memory needs of users
+* profiling to assess performance
 
-* basic implementation of all interfaces
-* region management using linked-lists
-* no support for multi-threading
-* basic unit tests
+## Various Project Information
 
-## Project Details
-
-### Compliance
+### Standards
 
 * C++14
 * Misra C++23
-* POSIX
-
-### Detailed Design
-
-* interfaces defined in header
-* allocation algorithms described in markdown files
-* requirements for all functional and non-functional properties
-* all requirements are traceable to unit tests
 
 ### Static tests
 
-* static analysis
+* static analysis with clang-tidy
+* autoformatting with clang-format
 
 ### Dynamic tests
 
-* unit tests with MC/DC coverage
-* performance stress tests
+* unit testing via googletest framework
+
+planned for 1.0:
+
+* MC/DC coverage
+* performance tests
 * fault injection tests
 * fuzz tests
-
-### Profiling
-
-* extended profiling available to tune configuration
-
-### Tooling
-
-* build system: bazel
-* tests: googletest
-* static analysis: clang-tidy
-* formatting: clang-format

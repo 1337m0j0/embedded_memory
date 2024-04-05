@@ -1,0 +1,16 @@
+---
+Checks: '*,-modernize-use-trailing-return-type,-llvm*,-abseil*,-altera*,-android*,-fuchsia*,-linuxkernel*,-mpi*,-objc*,-openmp*,-zircon*'
+WarningsAsErrors: ''
+HeaderFileExtensions:
+  - ''
+  - h
+  - hh
+  - hpp
+  - hxx
+ImplementationFileExtensions:
+  - c
+  - cc
+  - cpp
+  - cxx
+SystemHeaders:   false
+...
