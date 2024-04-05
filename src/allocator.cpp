@@ -18,3 +18,13 @@ void *em::Allocator::Alloc(const std::size_t requested_size, const bool clear_re
   }
   return nullptr;
 }
+
+void em::Allocator::Free(void *ptr) noexcept {
+  for (IMemoryPoolList *list = em::Allocator::memory_pool_list_; list != nullptr;
+       list = list->next) {
+    IMemoryPool *const memory_pool = list->current;
+    if (memory_pool->PointerBelongsToMemoryPool(ptr)) {
+      memory_pool->FreeBlock(ptr);
+    }
+  }
+}
