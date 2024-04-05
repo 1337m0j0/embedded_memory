@@ -1,0 +1,11 @@
+# Embedded Memory Changelog
+
+## Version 0.1.0
+
+First release with the following features:
+* memory allocation via memory pools from statically allocated blocks
+* support for allocate/clear-allocate/free
+* free/reserved blocks are managed via linked lists
+* compile-time configuration
+
+NOTE: This release doesn't support multi-threading.
